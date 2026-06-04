@@ -38,3 +38,7 @@ out/
 
 # claude local settings
 .claude/*.local*
+
+# java
+taget/
+*.class
