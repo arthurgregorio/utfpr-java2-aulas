@@ -40,5 +40,5 @@ out/
 .claude/*.local*
 
 # java
-taget/
+target/
 *.class
