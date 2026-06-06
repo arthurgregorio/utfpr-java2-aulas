@@ -59,15 +59,25 @@ public class Video01_Generics {
 
     // Bounded type parameter, <T extends Pagamento> garante que só aceitamos pagamentos e ainda podemos chamar
     // valor() com segurança
-    static <T extends Pagamento> double somar(List<T> pagamentos) {
+    static double somar(List<Pagamento> pagamentos) {
 
         double total = 0;
 
-        for (T p : pagamentos) {
+        for (Pagamento p : pagamentos) {
             total += p.valor();
         }
         return total;
     }
+
+//    static <T extends Pagamento> double somar(List<T> pagamentos) {
+//
+//        double total = 0;
+//
+//        for (T p : pagamentos) {
+//            total += p.valor();
+//        }
+//        return total;
+//    }
 
     // Wildcards - ? extends (PECS - "Producer Extends") apenas lemos da lista, então usamos extends.
     static double somarLeitura(List<? extends Pagamento> pagamentos) {
@@ -96,8 +106,8 @@ public class Video01_Generics {
         final List<Boleto> boletos = new ArrayList<>();
         boletos.add(new Boleto(80.0, "34191.79001..."));
 
-        IO.println("Total pix (bounded): " + somar(pixes));
-        IO.println("Total boleto (bounded): " + somar(boletos));
+//        IO.println("Total pix (bounded): " + somar(pixes));
+//        IO.println("Total boleto (bounded): " + somar(boletos));
 
         IO.println("Total pix (extends): " + somarLeitura(pixes));
         IO.println("Total boleto (extends): " + somarLeitura(boletos));
