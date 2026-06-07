@@ -48,37 +48,37 @@ public class Video04_Reflection {
         // 1) INTROSPECÇÃO: descobrir a estrutura da classe em runtime.
         IO.println("== Campos ==");
 
-        for (Field f : clazz.getDeclaredFields()) {
-            IO.println(String.format("  %s %s%n", f.getType().getSimpleName(), f.getName()));
+        for (Field field : clazz.getDeclaredFields()) {
+            IO.println(String.format("  %s %s%n", field.getType().getSimpleName(), field.getName()));
         }
 
         IO.println("== Metodos publicos declarados ==");
-        for (Method m : clazz.getDeclaredMethods()) {
-            if (Modifier.isPublic(m.getModifiers())) {
-                IO.println("  " + m.getName());
+        for (Method method : clazz.getDeclaredMethods()) {
+            if (Modifier.isPublic(method.getModifiers())) {
+                IO.println("  " + method.getName());
             }
         }
 
         // 2) INSTANCIAÇÃO DINÂMICA: criar objeto sem usar 'new' diretamente.
-        final Constructor<?> ctor = clazz.getConstructor(String.class, double.class);
-        final Object obj = ctor.newInstance("Maria", 500.0);
+        final Constructor<?> constructor = clazz.getConstructor(String.class, double.class);
+        final Object object = constructor.newInstance("Maria", 500.0);
 
-        IO.println("\nObjeto criado por reflection: " + obj);
+        IO.println("\nObjeto criado por reflection: " + object);
 
         // 3) ACESSAR CAMPO PRIVADO (com setAccessible).
         final Field saldo = clazz.getDeclaredField("saldo");
         saldo.setAccessible(true);
 
-        IO.println("Saldo lido via reflection: " + saldo.get(obj));
+        IO.println("Saldo lido via reflection: " + saldo.get(object));
 
-        saldo.set(obj, 999.0); // escrevemos direto no campo privado
+        saldo.set(object, 999.0); // escrevemos direto no campo privado
 
-        IO.println("Apos alterar campo privado: " + obj);
+        IO.println("Apos alterar campo privado: " + object);
 
-        // 4) INVOCAÇÃO DINÂMICA de método.
+        // 4) INVOCAÇÃO DINÂMICA de metodo.
         final Method creditar = clazz.getMethod("creditar", double.class);
-        creditar.invoke(obj, 1.0);
+        creditar.invoke(object, 1.0);
 
-        IO.println("Apos invocar creditar(1.0): " + obj);
+        IO.println("Apos invocar creditar(1.0): " + object);
     }
 }

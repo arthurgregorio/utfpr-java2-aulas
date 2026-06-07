@@ -31,7 +31,7 @@ public class Video02_TypeErasure {
 
     static void main() {
 
-        final List<Pix> pixes = new ArrayList<>();
+        final List<Pix> pixes = new ArrayList<>(); // dps do erasure > final List<Object>
         final List<Boleto> boletos = new ArrayList<>();
 
         // PROVA 1: em runtime, as duas listas são a MESMA classe, o <Pix> e o <Boleto> foram "apagados" (erased).
@@ -39,8 +39,16 @@ public class Video02_TypeErasure {
         IO.println("Classe de boletos: " + boletos.getClass());
         IO.println("Sao a mesma classe? " + (pixes.getClass() == boletos.getClass()));
 
-        // PROVA 2: por isso não existe "new T[]" nem "instanceof List<Pix>", o código abaixo NÃO compila:
-        // if (pixes instanceof List<Pix>) { } // erro: illegal generic type
+        // PROVA 2: por isso não existe "new T[]" nem "Object instanceof List<Pix>":
+//        if (pixes instanceof List<Pix>) {
+//            IO.println("É uma lista de Pix");
+//        }
+
+//        final Object objetosPix = pixes;
+//        if (objetosPix instanceof List<Pix>) {
+//            IO.println("É uma lista de Pix");
+//        }
+
         // T[] array = new T[10]; // erro: generic array creation
 
         // PROVA 3: o que o compilador realmente "vê" depois do erasure, List<Pix> vira List<Object> internamente,
@@ -68,6 +76,7 @@ public class Video02_TypeErasure {
 
         final List rawList = pixes; // raw type: o compilador só avisa (warning)
         rawList.add(new Boleto(999)); // inserimos um Boleto numa List<Pix>!
+//        rawList.add(new Integer(100));
 
         IO.println("\nLista 'de Pix' agora contem um Boleto escondido.");
 

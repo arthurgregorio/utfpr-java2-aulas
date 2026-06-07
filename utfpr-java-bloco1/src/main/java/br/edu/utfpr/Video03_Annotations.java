@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
  * Ainda no sistema de pagamentos: vamos anotar campos que precisam ser validados. Neste vídeo só definimos as
  * annotations e as usamos; no vídeo 5 vamos lê-las via Reflection para construir um validador
  * <p>
- * Este arquivo concentra as definições de annotation. Em projeto real cada uma ficaria em seu próprio arquivo .java.
+ * Em projeto real cada uma ficaria em seu próprio arquivo .java.
  */
 public class Video03_Annotations {
 
@@ -29,6 +29,7 @@ public class Video03_Annotations {
     @Target(ElementType.FIELD)
     @Retention(RetentionPolicy.RUNTIME)
     public @interface Tamanho {
+
         int min() default 0;
 
         int max() default Integer.MAX_VALUE;
