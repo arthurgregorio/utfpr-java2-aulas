@@ -26,15 +26,15 @@ public class Video06_PatternMatching {
     // 1) pattern matching com instanceof - antes: instanceof + cast manual, agora: a variável já vem tipada
     static String descricaoAntiga(Object o) {
         if (o instanceof Pix) {
-            final Pix p = (Pix) o; // cast manual e repetitivo
-            return "Pix para " + p.chave();
+            final Pix pix = (Pix) o; // cast manual e repetitivo
+            return "Pix para " + pix.chave();
         }
         return "desconhecido";
     }
 
     static String descricaoNova(Object o) {
-        if (o instanceof Pix p) { // 'p' já é Pix, sem cast
-            return "Pix para " + p.chave();
+        if (o instanceof Pix pix) { // 'pix' já é Pix, sem cast
+            return "Pix para " + pix.chave();
         }
         return "desconhecido";
     }
