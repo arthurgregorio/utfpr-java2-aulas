@@ -11,7 +11,7 @@ import java.time.Duration;
  * <p>
  * Requer Java 25 LTS
  * <p>
- * Consulta a cotação do dólar (USD) usando a API publica Frankfurter, que nao exige chave
+ * Consulta a cotação do dólar (USD) usando a API publica Frankfurter
  */
 public class Video03_HttpClientSync {
 
