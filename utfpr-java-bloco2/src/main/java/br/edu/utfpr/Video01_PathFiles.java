@@ -13,7 +13,9 @@ import java.nio.file.Path;
 public class Video01_PathFiles {
 
     static void main() throws IOException {
-   
+
+        // final File file = new File("dados-cotacoes" + File.separator + "entrada" + File.separator + "moedas.txt");
+
         // 1) Criar Paths sem concatenar strings na mão.
         final Path base = Path.of("dados-cotacoes");
         Path entrada = base.resolve("entrada"); // dados-cotacoes/entrada
