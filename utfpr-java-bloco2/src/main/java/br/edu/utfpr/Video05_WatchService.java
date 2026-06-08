@@ -1,11 +1,6 @@
 package br.edu.utfpr;
 
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardWatchEventKinds;
-import java.nio.file.WatchKey;
-import java.nio.file.WatchService;
+import java.nio.file.*;
 
 /**
  * VÍDEO 5 — WatchService: reagindo a mudanças em pastas
@@ -40,7 +35,7 @@ public class Video05_WatchService {
 
                 for (var evento : key.pollEvents()) {
                     var tipo = evento.kind();
-                    Path nome = (Path) evento.context();
+                    final Path nome = (Path) evento.context();
                     IO.println(tipo.name() + " -> " + nome);
                 }
 

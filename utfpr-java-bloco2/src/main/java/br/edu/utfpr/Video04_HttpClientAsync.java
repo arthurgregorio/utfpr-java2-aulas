@@ -26,7 +26,7 @@ public class Video04_HttpClientAsync {
 
             // Dispara TODAS as requisições sem bloquear.
             final List<CompletableFuture<String>> futuros = moedas.stream()
-                    .map(modeda -> consultar(client, modeda))
+                    .map(moeda -> consultar(client, moeda))
                     .toList();
 
             // Espera todas terminarem.
