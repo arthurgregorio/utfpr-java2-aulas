@@ -33,16 +33,14 @@ public class Video06_Serializacao {
 
         // 1) Serialização binária nativa.
         final Path bin = dir.resolve("cotacoes.ser");
-        try (ObjectOutputStream out =
-                     new ObjectOutputStream(Files.newOutputStream(bin))) {
+        try (ObjectOutputStream out = new ObjectOutputStream(Files.newOutputStream(bin))) {
             out.writeObject(cotacoes);
         }
         IO.println("Serializado (binario): " + Files.size(bin) + " bytes");
 
         // Desserializacao (cuidado: so faca com dados confiaveis).
         try (ObjectInputStream in = new ObjectInputStream(Files.newInputStream(bin))) {
-            @SuppressWarnings("unchecked")
-            final List<Cotacao> recuperadas = (List<Cotacao>) in.readObject();
+            @SuppressWarnings("unchecked") final List<Cotacao> recuperadas = (List<Cotacao>) in.readObject();
             IO.println("Recuperadas: " + recuperadas);
         }
 
