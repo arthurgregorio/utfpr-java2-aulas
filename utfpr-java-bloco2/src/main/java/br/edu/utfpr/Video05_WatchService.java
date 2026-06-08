@@ -9,8 +9,7 @@ import java.nio.file.*;
  * <p>
  * Monitora a pasta de entrada do coletor. Ao cair um arquivo novo, o programa reage automaticamente (hot folder).
  * <p>
- * Para testar: rode o programa e, em outro terminal, crie um arquivo dentro de dados-cotacoes/entrada
- * (ex.: 'touch dados-cotacoes/entrada/x.txt').
+ * Para testar: rode o arquivo do video 1
  */
 public class Video05_WatchService {
 
