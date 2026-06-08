@@ -21,11 +21,12 @@ public class Video04_HttpClientAsync {
         final List<String> moedas = List.of("BRL", "EUR", "GBP", "JPY", "CAD");
 
         try (HttpClient client = HttpClient.newHttpClient()) {
+
             long inicio = System.currentTimeMillis();
 
             // Dispara TODAS as requisições sem bloquear.
             final List<CompletableFuture<String>> futuros = moedas.stream()
-                    .map(m -> consultar(client, m))
+                    .map(modeda -> consultar(client, modeda))
                     .toList();
 
             // Espera todas terminarem.
@@ -34,7 +35,7 @@ public class Video04_HttpClientAsync {
                     .join();
 
             // Coleta os resultados ja prontos.
-            futuros.forEach(f -> IO.println(f.join()));
+            futuros.forEach(futuro -> IO.println(futuro.join()));
 
             long fim = System.currentTimeMillis();
             IO.println("\nTempo total: " + (fim - inicio) + " ms " + "(aproxima-se da requisicao mais lenta, nao da soma)");
