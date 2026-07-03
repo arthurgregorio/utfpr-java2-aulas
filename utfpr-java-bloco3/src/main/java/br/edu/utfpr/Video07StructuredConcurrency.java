@@ -34,7 +34,8 @@ public class Video07StructuredConcurrency {
 
     static List<Item> buscarItens() {
         dormir(200);
-        return List.of(new Item("Servico", 500.0));
+//        return List.of(new Item("Servico", 500.0));
+        throw new RuntimeException("falha ao buscar itens");
     }
 
     static Fatura gerarFatura() throws InterruptedException {
@@ -58,11 +59,16 @@ public class Video07StructuredConcurrency {
     void main() throws InterruptedException {
 
         final long instanteInicio = System.currentTimeMillis();
-        final Fatura fatura = gerarFatura();
-        final long instanteFim = System.currentTimeMillis();
 
-        IO.println("Fatura: " + fatura);
-        IO.println("Tempo: " + (instanteFim - instanteInicio) + " ms (~ da subtarefa mais lenta)");
+        try {
+            final Fatura fatura = gerarFatura();
+            IO.println("Fatura: " + fatura);
+        } catch (RuntimeException excecao) {
+            System.out.println("Falhou: " + excecao.getMessage());
+        } finally {
+            final long instanteFim = System.currentTimeMillis();
+            IO.println("Tempo: " + (instanteFim - instanteInicio) + " ms");
+        }
     }
 
     static void dormir(final long milissegundos) {
