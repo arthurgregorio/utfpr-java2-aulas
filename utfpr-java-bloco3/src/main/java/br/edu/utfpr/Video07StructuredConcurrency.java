@@ -34,14 +34,14 @@ public class Video07StructuredConcurrency {
 
     static List<Item> buscarItens() {
         dormir(200);
-//        return List.of(new Item("Servico", 500.0));
-        throw new RuntimeException("falha ao buscar itens");
+        return List.of(new Item("Servico", 500.0));
+//        throw new RuntimeException("falha ao buscar itens");
     }
 
     static Fatura gerarFatura() throws InterruptedException {
 
         // open + Joiner: política "todas devem ter sucesso, senão falha tudo".
-        try (final var escopo = StructuredTaskScope.open(StructuredTaskScope.Joiner.<Object>allSuccessfulOrThrow())) {
+        try (final var escopo = StructuredTaskScope.open(StructuredTaskScope.Joiner.awaitAllSuccessfulOrThrow())) {
 
             final Subtask<Emissor> subtarefaEmissor = escopo.fork(Video07StructuredConcurrency::buscarEmissor);
             final Subtask<Cliente> subtarefaCliente = escopo.fork(Video07StructuredConcurrency::buscarCliente);
