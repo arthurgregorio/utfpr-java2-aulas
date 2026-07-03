@@ -1,10 +1,10 @@
 package br.edu.utfpr;
 
 /**
- * VÍDEO 1 — Por que concorrência é difícil
+ * VÍDEO 2 — Por que concorrência é difícil
  * Requer Java 25
  */
-public class Video01Problemas {
+public class Video02Problemas {
 
     // race condition
     static final class Contador {
@@ -36,7 +36,8 @@ public class Video01Problemas {
         for (int indice = 0; indice < quantidadeThreads; indice++) {
             threads[indice] = new Thread(() -> {
                 for (int repeticao = 0; repeticao < incrementosPorThread; repeticao++) {
-                    contador.incrementarInseguro(); // troque por incrementarSeguro() para corrigir
+                    contador.incrementarInseguro();
+//                    contador.incrementarSeguro();
                 }
             });
         }

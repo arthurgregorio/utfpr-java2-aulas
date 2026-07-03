@@ -1,12 +1,13 @@
 package br.edu.utfpr;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
- * VÍDEO 3 — CompletableFuture: revisão e aprofundamento
+ * VÍDEO 4 — CompletableFuture: revisão e aprofundamento
  * Requer Java 25
  */
-public class Video03CompletableFuture {
+public class Video04CompletableFuture {
 
     void main() throws Exception {
 
@@ -17,16 +18,17 @@ public class Video03CompletableFuture {
         });
 
         // thenApply: transforma o resultado (sem bloquear)
-        final CompletableFuture<Integer> precoComImposto =
-                precoBase.thenApply(preco -> preco + preco * 10 / 100);
+        final CompletableFuture<Integer> precoComImposto = precoBase
+                .orTimeout(5, TimeUnit.SECONDS)
+                .thenApply(preco -> preco + preco * 10 / 100);
 
         // thenCompose: encadeia OUTRA operação assíncrona (evita future de future)
         final CompletableFuture<String> notaFiscal = precoComImposto
                 .thenCompose(valor -> CompletableFuture.supplyAsync(() -> "Nota fiscal: R$ " + valor));
 
         // exceptionally: trata falha sem quebrar a cadeia
-        final CompletableFuture<String> notaSegura =
-                notaFiscal.exceptionally(excecao -> "Falhou: " + excecao.getMessage());
+        final CompletableFuture<String> notaSegura = notaFiscal
+                .exceptionally(excecao -> "Falhou: " + excecao.getMessage());
 
         // thenCombine: junta dois futures independentes
         final CompletableFuture<Integer> valorFrete = CompletableFuture.supplyAsync(() -> 20);

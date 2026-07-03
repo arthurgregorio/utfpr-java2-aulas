@@ -5,10 +5,10 @@ import java.util.concurrent.Executors;
 import java.util.stream.IntStream;
 
 /**
- * VÍDEO 5 — Virtual Threads
+ * VÍDEO 6 — Virtual Threads
  * Requer Java 25
  */
-public class Video05VirtualThreads {
+public class Video06VirtualThreads {
 
     void main() throws InterruptedException {
 

@@ -6,10 +6,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 /**
- * VÍDEO 4 — A dor do ExecutorService (exemplo da fatura)
+ * VÍDEO 5 — A dor do ExecutorService (exemplo da fatura)
  * Requer Java 25
  */
-public class Video04DorDoExecutor {
+public class Video05DorDoExecutor {
 
     record Emissor(String nome) {
     }
@@ -41,9 +41,9 @@ public class Video04DorDoExecutor {
     static void gerarFatura() throws Exception {
         try (final ExecutorService executor = Executors.newFixedThreadPool(3)) {
 
-            final Future<Emissor> futuroEmissor = executor.submit(Video04DorDoExecutor::buscarEmissor);
-            final Future<Cliente> futuroCliente = executor.submit(Video04DorDoExecutor::buscarCliente);
-            final Future<List<Item>> futuroItens = executor.submit(Video04DorDoExecutor::buscarItens);
+            final Future<Emissor> futuroEmissor = executor.submit(Video05DorDoExecutor::buscarEmissor);
+            final Future<Cliente> futuroCliente = executor.submit(Video05DorDoExecutor::buscarCliente);
+            final Future<List<Item>> futuroItens = executor.submit(Video05DorDoExecutor::buscarItens);
 
             // get() na ordem fixa, ficamos presos esperando o cliente (~1,5s) mesmo que os itens já tenham
             // falhado (~0,2s)

@@ -6,10 +6,10 @@ import java.util.concurrent.StructuredTaskScope.Joiner;
 import static java.lang.ScopedValue.where;
 
 /**
- * VÍDEO 7 — Scoped Values (JEP 506, finalizado no JDK 25)
+ * VÍDEO 8 — Scoped Values (JEP 506, finalizado no JDK 25)
  * Requer Java 25
  */
-public class Video07ScopedValues {
+public class Video08ScopedValues {
 
     private static final ScopedValue<String> REQUEST_ID = ScopedValue.newInstance();
 

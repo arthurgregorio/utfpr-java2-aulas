@@ -6,10 +6,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 /**
- * VÍDEO 2 — Do Thread cru ao ExecutorService
+ * VÍDEO 3 — Do Thread cru ao ExecutorService
  * Requer Java 25
  */
-public class Video02Executor {
+public class Video03Executor {
 
     void main() throws Exception {
 

@@ -5,10 +5,10 @@ import java.util.concurrent.StructuredTaskScope;
 import java.util.concurrent.StructuredTaskScope.Subtask;
 
 /**
- * VÍDEO 6 — Structured Concurrency (API finalizada no JDK 25)
+ * VÍDEO 7 — Structured Concurrency (API finalizada no JDK 25)
  * Requer Java 25
  */
-public class Video06StructuredConcurrency {
+public class Video07StructuredConcurrency {
 
     record Emissor(String nome) {
     }
@@ -42,9 +42,9 @@ public class Video06StructuredConcurrency {
         // open + Joiner: política "todas devem ter sucesso, senão falha tudo".
         try (final var escopo = StructuredTaskScope.open(StructuredTaskScope.Joiner.<Object>allSuccessfulOrThrow())) {
 
-            final Subtask<Emissor> subtarefaEmissor = escopo.fork(Video06StructuredConcurrency::buscarEmissor);
-            final Subtask<Cliente> subtarefaCliente = escopo.fork(Video06StructuredConcurrency::buscarCliente);
-            final Subtask<List<Item>> subtarefaItens = escopo.fork(Video06StructuredConcurrency::buscarItens);
+            final Subtask<Emissor> subtarefaEmissor = escopo.fork(Video07StructuredConcurrency::buscarEmissor);
+            final Subtask<Cliente> subtarefaCliente = escopo.fork(Video07StructuredConcurrency::buscarCliente);
+            final Subtask<List<Item>> subtarefaItens = escopo.fork(Video07StructuredConcurrency::buscarItens);
 
             escopo.join(); // espera todas e se uma falhar, cancela as demais
 
