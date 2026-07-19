@@ -11,28 +11,39 @@ import java.util.stream.IntStream;
 public class Video07StreamsParalelos {
 
     void main() {
+
         // ---- Quando vale: muito dado + operacao cara + independente ----
         final long inicioSequencial = System.currentTimeMillis();
+
         final long somaSequencial = IntStream.rangeClosed(1, 10_000_000)
                 .mapToLong(numero -> (long) numero * numero)
                 .sum();
+
         final long tempoSequencial = System.currentTimeMillis() - inicioSequencial;
 
         final long inicioParalelo = System.currentTimeMillis();
+
         final long somaParalela = IntStream.rangeClosed(1, 10_000_000)
                 .parallel()
                 .mapToLong(numero -> (long) numero * numero)
                 .sum();
+
         final long tempoParalelo = System.currentTimeMillis() - inicioParalelo;
 
         IO.println("Soma sequencial: " + somaSequencial + " em " + tempoSequencial + " ms");
         IO.println("Soma paralela:   " + somaParalela + " em " + tempoParalelo + " ms");
         IO.println("(resultados iguais; tempo varia conforme nucleos disponiveis)");
 
+        // The N*Q rule - parallel streams
+        // N = numero de elementos
+        // Q = tempo de processamento no processador por elemento
+
         // ---- ARMADILHA 1: estado compartilhado mutavel ----
         // NÃO faça isto: ArrayList não é thread-safe -> resultado corrompido/errado.
         final List<Integer> destinoInseguro = new ArrayList<>();
+
         IntStream.range(0, 1000).parallel().forEach(destinoInseguro::add); // ERRADO
+
         IO.println("\nArmadilha (add em ArrayList paralelo): tamanho = "
                 + destinoInseguro.size() + " (esperado 1000; pode variar/corromper)");
 

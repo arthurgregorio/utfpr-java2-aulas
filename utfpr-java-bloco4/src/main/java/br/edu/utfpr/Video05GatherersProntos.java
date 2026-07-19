@@ -27,7 +27,7 @@ public class Video05GatherersProntos {
                 .gather(Gatherers.windowSliding(3))
                 .toList();
 
-        IO.println("windowSliding(3): " + janelasDeslizantes); // [[1,2,3],[2,3,4],...]
+        IO.println("windowSliding(3): " + janelasDeslizantes); // [[1, 2, 3], [2, 3, 4], [3, 4, 5], [4, 5, 6], [5, 6, 7]]
 
         // ---- scan: emite CADA resultado parcial da acumulacao ----
         // (como reduce, mas você vê todos os passos, como operação intermediária)
