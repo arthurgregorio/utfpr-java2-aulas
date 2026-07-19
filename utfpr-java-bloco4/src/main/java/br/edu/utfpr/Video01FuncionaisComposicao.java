@@ -21,7 +21,7 @@ public class Video01FuncionaisComposicao {
                 new Produto("Cadeira", 600.0, "moveis"));
 
         // ---- As quatro interfaces funcionais centrais ----
-        final Function<Produto, String> obterNome = Produto::nome;
+        final Function<Produto, String> obterNome = Produto::nome; // syntax-sugar
         final Predicate<Produto> ehCaro = produto -> produto.preco() > 500;
         final Supplier<Produto> produtoPadrao = () -> new Produto("Desconhecido", 0.0, "n/a");
         final Consumer<Produto> imprimir = produto -> IO.println("  " + produto.nome());

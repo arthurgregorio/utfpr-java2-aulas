@@ -9,8 +9,9 @@ import java.util.*;
 public class Video02CollectionsAvancadas {
 
     void main() {
+
         // ---- Deque: fila dupla (pilha OU fila) ----
-        final Deque<String> pilha = new ArrayDeque<>();
+        final Deque<String> pilha = new ArrayDeque<>(); // De-queue > FIFO e LIFO ao mesmo tempo!
         pilha.push("primeiro");
         pilha.push("segundo");
         IO.println("Deque como pilha (LIFO): " + pilha.pop()); // segundo
@@ -45,5 +46,9 @@ public class Video02CollectionsAvancadas {
         contagem.put("abelha", 2);
         contagem.put("gato", 3);
         IO.println("\nLinkedHashMap mantem ordem de insercao: " + contagem.keySet());
+
+        // map que não garante a ordem de inserção
+        final Map<String, Integer> meuMapa = Map.of("chave", 100, "chave2", 200, "chave3", 300);
+        meuMapa.forEach((chave, valor) -> IO.println(chave + ": " + valor));
     }
 }

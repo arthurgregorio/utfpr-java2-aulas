@@ -24,21 +24,21 @@ public class Video04CollectorsAvancados {
 
         // ---- groupingBy com downstream: soma por regiao ----
         final Map<String, Double> totalPorRegiao = vendas.stream()
-                .collect(Collectors.groupingBy(Venda::regiao,
-                        Collectors.summingDouble(Venda::valor)));
+                .collect(Collectors.groupingBy(Venda::regiao, Collectors.summingDouble(Venda::valor)));
+
         IO.println("Total por regiao: " + totalPorRegiao);
 
         // ---- groupingBy + mapping: nomes de vendedores por regiao ----
         final Map<String, List<String>> vendedoresPorRegiao = vendas.stream()
-                .collect(Collectors.groupingBy(Venda::regiao,
-                        Collectors.mapping(Venda::vendedor, Collectors.toList())));
+                .collect(Collectors.groupingBy(Venda::regiao, Collectors.mapping(Venda::vendedor, Collectors.toList())));
+
         IO.println("Vendedores por regiao: " + vendedoresPorRegiao);
 
         // ---- groupingBy com TreeMap (ordenado) + filtering ----
         final Map<String, List<Venda>> grandesVendasPorRegiao = vendas.stream()
                 .collect(Collectors.groupingBy(Venda::regiao, TreeMap::new,
-                        Collectors.filtering(venda -> venda.valor() >= 1000,
-                                Collectors.toList())));
+                        Collectors.filtering(venda -> venda.valor() >= 1000, Collectors.toList())));
+
         IO.println("Grandes vendas por regiao (ordenado): " + grandesVendasPorRegiao);
 
         // ---- teeing: DOIS collectors ao mesmo tempo, combinados ----
@@ -48,18 +48,21 @@ public class Video04CollectorsAvancados {
                         Collectors.summingDouble(Venda::valor),
                         Collectors.counting(),
                         (soma, contagem) -> soma / contagem));
+
         IO.println("\nTicket medio (via teeing): " + media);
 
         // ---- Collector CUSTOMIZADO: concatena nomes em uma string ----
         final Collector<Venda, StringBuilder, String> concatenarVendedores =
                 Collector.of(
-                        StringBuilder::new,                                  // supplier
-                        (acumulador, venda) -> {                             // accumulator
-                            if (acumulador.length() > 0) acumulador.append(", ");
+                        StringBuilder::new,                            // supplier
+                        (acumulador, venda) -> {    // accumulator
+                            if (!acumulador.isEmpty()) {
+                                acumulador.append(", ");
+                            }
                             acumulador.append(venda.vendedor());
                         },
-                        (esquerda, direita) -> esquerda.append(direita),     // combiner
-                        StringBuilder::toString);                            // finisher
+                        StringBuilder::append,                         // combiner
+                        StringBuilder::toString);                      // finisher
 
         final String todosOsVendedores = vendas.stream().collect(concatenarVendedores);
         IO.println("Vendedores (collector customizado): " + todosOsVendedores);

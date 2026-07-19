@@ -1,5 +1,6 @@
 package br.edu.utfpr;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -8,6 +9,9 @@ import java.util.List;
  * Requer Java 25 LTS
  */
 public class Video03Comparator {
+
+    // Comparator - não altera a classe que vai ser comparada
+    // Comparable - obrigatoriamente, preciso implementar o metodo e alterar a classe que sera comparada
 
     record Funcionario(String nome, String departamento, int salario) {
     }
@@ -44,8 +48,10 @@ public class Video03Comparator {
 
         // ---- nullsFirst: lida com valores nulos com seguranca ----
         final Comparator<String> comNulos = Comparator.nullsFirst(Comparator.naturalOrder());
-        final List<String> valores = java.util.Arrays.asList("banana", null, "abacaxi");
+
+        final List<String> valores = Arrays.asList("banana", null, "abacaxi");
         valores.sort(comNulos);
+
         IO.println("\nCom nullsFirst: " + valores);
     }
 }
